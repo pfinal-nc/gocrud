@@ -6,7 +6,9 @@ package config
  * @Date: 2022/2/28 19:46
  * @Desc:
  */
-import "gohub/pkg/config"
+import (
+	"gohub/pkg/config"
+)
 
 func init() {
 	config.Add("app", func() map[string]interface{} {
