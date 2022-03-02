@@ -23,3 +23,8 @@ func ValidateVerifyCode(key, answer string, errs map[string][]string) map[string
 	//errs["verify_code"] = append(errs["verify_code"], "验证码错误")
 	return errs
 }
+
+func ValidateCaptcha(key, answer string, errs map[string][]string) map[string][]string {
+
+	return errs
+}
