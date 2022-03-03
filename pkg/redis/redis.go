@@ -2,21 +2,12 @@ package redis
 
 import (
 	"context"
-	"github.com/go-redis/redis/v8"
 	"gohub/pkg/logger"
 	"sync"
 	"time"
+
+	redis "github.com/go-redis/redis/v8"
 )
-
-/**
- * @Author: PFinal南丞
- * @Author: lampxiezi@163.com
- * @Date: 2022/3/1 14:49
- * @Desc:
- */
-
-// once 确保全局的 Redis 对象只实例一次
-var once sync.Once
 
 // RedisClient Redis 服务
 type RedisClient struct {
@@ -24,10 +15,16 @@ type RedisClient struct {
 	Context context.Context
 }
 
+// once 确保全局的 Redis 对象只实例一次
+var once sync.Once
+
+// Redis 全局 Redis，使用 db 1
+var Redis *RedisClient
+
 // ConnectRedis 连接 redis 数据库，设置全局的 Redis 对象
 func ConnectRedis(address string, username string, password string, db int) {
 	once.Do(func() {
-		_ = NewClient(address, username, password, db)
+		Redis = NewClient(address, username, password, db)
 	})
 }
 
