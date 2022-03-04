@@ -10,6 +10,7 @@ import (
 	"fmt"
 	mathrand "math/rand"
 	"reflect"
+	"strconv"
 	"time"
 )
 
@@ -60,4 +61,13 @@ func RandomString(length int) string {
 		b[i] = letters[mathrand.Intn(len(letters))]
 	}
 	return string(b)
+}
+
+func RandomNumber(length int) string {
+	mathrand.Seed(time.Now().UnixNano())
+	var str string
+	for i := 0; i < length; i++ {
+		str += strconv.Itoa(mathrand.Intn(9))
+	}
+	return str
 }

@@ -31,18 +31,8 @@ func init() {
 		CmdMigrateRollback,
 		CmdMigrateRefresh,
 		CmdMigrateReset,
+		CmdMigrateFresh,
 	)
-}
-
-func migrator() *migrate.Migrator {
-	// 注册 database/migrations 下的所有迁移文件
-	migrations.Initialize()
-	// 初始化 migrator
-	return migrate.NewMigrator()
-}
-
-func runUp(cmd *cobra.Command, args []string) {
-	migrator().Up()
 }
 
 var CmdMigrateRollback = &cobra.Command{
@@ -55,6 +45,17 @@ var CmdMigrateRollback = &cobra.Command{
 
 func runDown(cmd *cobra.Command, args []string) {
 	migrator().Rollback()
+}
+
+func migrator() *migrate.Migrator {
+	// 注册 database/migrations 下的所有迁移文件
+	migrations.Initialize()
+	// 初始化 migrator
+	return migrate.NewMigrator()
+}
+
+func runUp(cmd *cobra.Command, args []string) {
+	migrator().Up()
 }
 
 var CmdMigrateReset = &cobra.Command{
@@ -75,4 +76,14 @@ var CmdMigrateRefresh = &cobra.Command{
 
 func runRefresh(cmd *cobra.Command, args []string) {
 	migrator().Refresh()
+}
+
+var CmdMigrateFresh = &cobra.Command{
+	Use:   "fresh",
+	Short: "Drop all tables and re-run all migrations",
+	Run:   runFresh,
+}
+
+func runFresh(cmd *cobra.Command, args []string) {
+	migrator().Fresh()
 }

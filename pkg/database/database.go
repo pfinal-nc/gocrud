@@ -53,7 +53,7 @@ func DeleteAllTables() error {
 }
 
 func deleteAllSqliteTables() error {
-	tables := []string{}
+	var tables []string
 	DB.Select(&tables, "SELECT name FROM sqlite_master WHERE type='table'")
 	for _, table := range tables {
 		DB.Migrator().DropTable(table)
@@ -76,4 +76,10 @@ func deleteMysqlDatabase() error {
 		return err
 	}
 	return nil
+}
+
+func TableName(obj interface{}) string {
+	stmt := &gorm.Statement{DB: DB}
+	stmt.Parse(obj)
+	return stmt.Schema.Table
 }

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	controllers "gohub/app/http/controllers/api/v1"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
 )
@@ -45,6 +46,19 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			// 刷新 Token
 			authGroup.POST("/login/refresh-token", lgc.RefreshToken)
 
+			uc := new(controllers.UsersController)
+			// 获取当前用户
+			v1.GET("/user", middlewares.AuthJwt(), uc.CurrentUser)
+			usersGroup := v1.Group("/users")
+			{
+				usersGroup.GET("", uc.Index)
+			}
+
+			cgc := new(controllers.CategoriesController)
+			cgcGroup := v1.Group("/categories")
+			{
+				cgcGroup.POST("", middlewares.AuthJwt(), cgc.Store)
+			}
 		}
 	}
 }
