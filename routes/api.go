@@ -5,6 +5,7 @@ import (
 	controllers "gohub/app/http/controllers/api/v1"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
+	"gohub/pkg/config"
 )
 
 /**
@@ -18,7 +19,13 @@ import (
 func RegisterAPIRoutes(r *gin.Engine) {
 
 	// 测试一个 v1 的路由组，我们所有的 v1 版本的路由都将存放到这里
-	v1 := r.Group("/v1")
+	var v1 *gin.RouterGroup
+	if len(config.Get("app.api_domain")) == 0 {
+		v1 = r.Group("/api/v1")
+	} else {
+		v1 = r.Group("/v1")
+	}
+	// 测试一个 v1 的路由组，我们所有的 v1 版本的路由都将存放到这里
 	v1.Use(middlewares.LimitIP("200-H"))
 	{
 		authGroup := v1.Group("/auth")
@@ -52,6 +59,8 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			usersGroup := v1.Group("/users")
 			{
 				usersGroup.GET("", uc.Index)
+				usersGroup.PUT("", middlewares.AuthJwt(), uc.UpdateProfile)
+				usersGroup.PUT("/avatar", middlewares.AuthJwt(), uc.UpdateAvatar)
 			}
 
 			cgc := new(controllers.CategoriesController)
@@ -61,6 +70,14 @@ func RegisterAPIRoutes(r *gin.Engine) {
 				cgcGroup.POST("", middlewares.AuthJwt(), cgc.Store)
 				cgcGroup.PUT("/:id", middlewares.AuthJwt(), cgc.Update)
 				cgcGroup.DELETE("/:id", middlewares.AuthJwt(), cgc.Delete)
+			}
+			tpc := new(controllers.TopicsController)
+			tpcGroup := v1.Group("/topics")
+			{
+				tpcGroup.GET("", tpc.Index)
+				tpcGroup.POST("", middlewares.AuthJwt(), tpc.Store)
+				tpcGroup.PUT("/:id", middlewares.AuthJwt(), tpc.Update)
+				tpcGroup.DELETE("/:id", middlewares.AuthJwt(), tpc.Delete)
 			}
 		}
 	}
