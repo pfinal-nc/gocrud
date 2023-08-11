@@ -10,8 +10,8 @@ package auth
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"gohub/app/models/user"
-	"gohub/pkg/logger"
+	"server/app/models/user"
+	"server/pkg/logger"
 )
 
 // Attempt 尝试登录

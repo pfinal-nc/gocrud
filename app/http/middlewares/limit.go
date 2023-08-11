@@ -3,11 +3,11 @@ package middlewares
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cast"
-	"gohub/pkg/app"
-	"gohub/pkg/limiter"
-	"gohub/pkg/logger"
-	"gohub/pkg/response"
 	"net/http"
+	"server/pkg/app"
+	"server/pkg/limiter"
+	"server/pkg/logger"
+	"server/pkg/response"
 )
 
 /**
@@ -24,7 +24,6 @@ import (
 // * 10 reqs/minute: "10-M"
 // * 1000 reqs/hour: "1000-H"
 // * 2000 reqs/day: "2000-D"
-//
 func LimitIP(limit string) gin.HandlerFunc {
 	if app.IsTesting() {
 		limit = "1000000-H"

@@ -1,11 +1,11 @@
 package middlewares
 
 import (
-	"gohub/pkg/logger"
-	"gohub/pkg/response"
 	"net"
 	"net/http/httputil"
 	"os"
+	"server/pkg/logger"
+	"server/pkg/response"
 	"strings"
 	"time"
 

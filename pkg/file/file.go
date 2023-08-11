@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"github.com/disintegration/imaging"
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/app"
-	"gohub/pkg/auth"
-	"gohub/pkg/helpers"
 	"io/ioutil"
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"server/pkg/app"
+	"server/pkg/auth"
+	"server/pkg/helpers"
 	"strings"
 )
 

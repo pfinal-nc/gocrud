@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"gohub/pkg/cache"
-	"gohub/pkg/console"
+	"server/pkg/cache"
+	"server/pkg/console"
 )
 
 var CmdCache = &cobra.Command{

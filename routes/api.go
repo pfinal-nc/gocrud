@@ -2,10 +2,10 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	controllers "gohub/app/http/controllers/api/v1"
-	"gohub/app/http/controllers/api/v1/auth"
-	"gohub/app/http/middlewares"
-	"gohub/pkg/config"
+	controllers "server/app/http/controllers/api/v1"
+	"server/app/http/controllers/api/v1/auth"
+	"server/app/http/middlewares"
+	"server/pkg/config"
 )
 
 /**

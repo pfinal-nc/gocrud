@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"gohub/pkg/config"
 	"gorm.io/gorm"
 	gormlogger "gorm.io/gorm/logger"
+	"server/pkg/config"
 )
 
 // DB 对象

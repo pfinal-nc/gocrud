@@ -1,11 +1,11 @@
 package migrate
 
 import (
-	"gohub/pkg/console"
-	"gohub/pkg/database"
-	"gohub/pkg/file"
 	"gorm.io/gorm"
 	"io/ioutil"
+	"server/pkg/console"
+	"server/pkg/database"
+	"server/pkg/file"
 )
 
 /**

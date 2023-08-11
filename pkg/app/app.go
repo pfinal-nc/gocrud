@@ -7,7 +7,7 @@ package app
  * @Desc:
  */
 import (
-	"gohub/pkg/config"
+	"server/pkg/config"
 	"time"
 )
 

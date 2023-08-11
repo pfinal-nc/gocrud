@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
-	"gohub/pkg/response"
 	"net/http"
+	"server/pkg/response"
 )
 
 /**

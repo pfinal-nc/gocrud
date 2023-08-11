@@ -2,9 +2,9 @@ package bootstrap
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/app/http/middlewares"
-	"gohub/routes"
 	"net/http"
+	"server/app/http/middlewares"
+	"server/routes"
 	"strings"
 )
 

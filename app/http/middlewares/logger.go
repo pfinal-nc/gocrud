@@ -5,9 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cast"
 	"go.uber.org/zap"
-	"gohub/pkg/helpers"
-	"gohub/pkg/logger"
 	"io/ioutil"
+	"server/pkg/helpers"
+	"server/pkg/logger"
 	"time"
 )
 

@@ -1,6 +1,6 @@
 package config
 
-import "gohub/pkg/config"
+import "server/pkg/config"
 
 /**
  * @Author: PFinal南丞

@@ -2,11 +2,11 @@ package auth
 
 import (
 	"github.com/gin-gonic/gin"
-	v1 "gohub/app/http/controllers/api/v1"
-	"gohub/app/models/user"
-	"gohub/app/requests"
-	"gohub/pkg/jwt"
-	"gohub/pkg/response"
+	v1 "server/app/http/controllers/api/v1"
+	"server/app/models/user"
+	"server/app/requests"
+	"server/pkg/jwt"
+	"server/pkg/response"
 )
 
 /**
@@ -46,7 +46,7 @@ func (sc *SignupController) SignupUsingPhone(c *gin.Context) {
 	}
 }
 
-//SignupUsingEmail 使用 Email + 验证码进行注册
+// SignupUsingEmail 使用 Email + 验证码进行注册
 func (sc *SignupController) SignupUsingEmail(c *gin.Context) {
 
 	// 1. 验证表单

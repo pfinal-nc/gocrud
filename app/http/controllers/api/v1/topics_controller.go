@@ -2,11 +2,11 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/app/models/topic"
-	"gohub/app/policies"
-	"gohub/app/requests"
-	"gohub/pkg/auth"
-	"gohub/pkg/response"
+	"server/app/models/topic"
+	"server/app/policies"
+	"server/app/requests"
+	"server/pkg/auth"
+	"server/pkg/response"
 )
 
 type TopicsController struct {

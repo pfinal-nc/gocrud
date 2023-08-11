@@ -2,10 +2,10 @@ package topic
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/app"
-	"gohub/pkg/database"
-	"gohub/pkg/paginator"
 	"gorm.io/gorm/clause"
+	"server/pkg/app"
+	"server/pkg/database"
+	"server/pkg/paginator"
 )
 
 func Get(idstr string) (topic Topic) {

@@ -2,8 +2,8 @@ package bootstrap
 
 import (
 	"fmt"
-	"gohub/pkg/config"
-	"gohub/pkg/redis"
+	"server/pkg/config"
+	"server/pkg/redis"
 )
 
 /**

@@ -1,8 +1,8 @@
 package hash
 
 import (
-	"gohub/pkg/logger"
 	"golang.org/x/crypto/bcrypt"
+	"server/pkg/logger"
 )
 
 /**

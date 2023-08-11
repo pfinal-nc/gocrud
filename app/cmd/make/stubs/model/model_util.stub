@@ -1,10 +1,10 @@
 package {{PackageName}}
 
 import (
-    "gohub/pkg/database"
-    "gohub/pkg/app"
-    "gohub/pkg/database"
-    "gohub/pkg/paginator"
+    "server/pkg/database"
+    "server/pkg/app"
+    "server/pkg/database"
+    "server/pkg/paginator"
 )
 
 func Get(idstr string) ({{VariableName}} {{StructName}}) {

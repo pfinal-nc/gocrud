@@ -2,10 +2,10 @@ package seeders
 
 import (
     "fmt"
-    "gohub/database/factories"
-    "gohub/pkg/console"
-    "gohub/pkg/logger"
-    "gohub/pkg/seed"
+    "server/database/factories"
+    "server/pkg/console"
+    "server/pkg/logger"
+    "server/pkg/seed"
 
     "gorm.io/gorm"
 )

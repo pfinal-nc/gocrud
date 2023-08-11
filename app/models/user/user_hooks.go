@@ -1,8 +1,8 @@
 package user
 
 import (
-	"gohub/pkg/hash"
 	"gorm.io/gorm"
+	"server/pkg/hash"
 )
 
 /**

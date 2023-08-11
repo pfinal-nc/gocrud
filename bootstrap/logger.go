@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
-	"gohub/pkg/config"
-	"gohub/pkg/logger"
+	"server/pkg/config"
+	"server/pkg/logger"
 )
 
 /**

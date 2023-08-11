@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"gohub/pkg/helpers"
 	"os"
+	"server/pkg/helpers"
 )
 
 /**

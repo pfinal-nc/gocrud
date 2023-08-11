@@ -3,8 +3,8 @@ package requests
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
-	"gohub/pkg/auth"
 	"mime/multipart"
+	"server/pkg/auth"
 )
 
 type UserUpdateProfileRequest struct {

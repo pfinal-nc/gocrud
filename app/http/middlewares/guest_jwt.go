@@ -2,8 +2,8 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/jwt"
-	"gohub/pkg/response"
+	"server/pkg/jwt"
+	"server/pkg/response"
 )
 
 /**

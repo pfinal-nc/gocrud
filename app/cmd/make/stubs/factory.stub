@@ -1,8 +1,8 @@
 package factories
 
 import (
-    "gohub/app/models/{{PackageName}}"
-    "gohub/pkg/helpers"
+    "server/app/models/{{PackageName}}"
+    "server/pkg/helpers"
 
     "github.com/bxcodec/faker/v3"
 )

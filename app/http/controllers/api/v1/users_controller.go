@@ -2,12 +2,12 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/app/models/user"
-	"gohub/app/requests"
-	"gohub/pkg/auth"
-	"gohub/pkg/config"
-	"gohub/pkg/file"
-	"gohub/pkg/response"
+	"server/app/models/user"
+	"server/app/requests"
+	"server/pkg/auth"
+	"server/pkg/config"
+	"server/pkg/file"
+	"server/pkg/response"
 )
 
 type UsersController struct {

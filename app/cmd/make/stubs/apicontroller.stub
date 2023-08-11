@@ -1,10 +1,10 @@
 package v1
 
 import (
-    "gohub/app/models/{{PackageName}}"
-    "gohub/app/policies"
-    "gohub/app/requests"
-    "gohub/pkg/response"
+    "server/app/models/{{PackageName}}"
+    "server/app/policies"
+    "server/app/requests"
+    "server/pkg/response"
 
     "github.com/gin-gonic/gin"
 )

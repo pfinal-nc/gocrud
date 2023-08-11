@@ -1,9 +1,9 @@
-//Package link 模型
+// Package link 模型
 package link
 
 import (
-	"gohub/app/models"
-	"gohub/pkg/database"
+	"server/app/models"
+	"server/pkg/database"
 )
 
 type Link struct {

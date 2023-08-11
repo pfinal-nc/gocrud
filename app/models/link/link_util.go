@@ -2,11 +2,11 @@ package link
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/app"
-	"gohub/pkg/cache"
-	"gohub/pkg/database"
-	"gohub/pkg/helpers"
-	"gohub/pkg/paginator"
+	"server/pkg/app"
+	"server/pkg/cache"
+	"server/pkg/database"
+	"server/pkg/helpers"
+	"server/pkg/paginator"
 	"time"
 )
 

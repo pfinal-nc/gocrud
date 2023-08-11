@@ -3,7 +3,7 @@ package make
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"gohub/pkg/console"
+	"server/pkg/console"
 	"strings"
 )
 

@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"gohub/app/cmd"
-	"gohub/app/cmd/make"
-	"gohub/bootstrap"
-	btsConfig "gohub/config"
-	"gohub/pkg/config"
-	"gohub/pkg/console"
 	"os"
+	"server/app/cmd"
+	"server/app/cmd/make"
+	"server/bootstrap"
+	btsConfig "server/config"
+	"server/pkg/config"
+	"server/pkg/console"
 )
 
 /**

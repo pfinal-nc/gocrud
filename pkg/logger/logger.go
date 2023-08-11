@@ -3,11 +3,11 @@ package logger
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"gohub/pkg/app"
-	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
+	"server/pkg/app"
 	"strings"
 	"time"
 )
@@ -82,7 +82,7 @@ func customTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(t.Format("2006-01-02 15:04:05"))
 }
 
-// getLogWriter 日志记录介质。Gohub 中使用了两种介质，os.Stdout 和文件
+// getLogWriter 日志记录介质。server 中使用了两种介质，os.Stdout 和文件
 func getLogWriter(filename string, maxSize, maxBackup, maxAge int, compress bool, logType string) zapcore.WriteSyncer {
 
 	// 如果配置了按照日期记录日志文件
@@ -111,8 +111,9 @@ func getLogWriter(filename string, maxSize, maxBackup, maxAge int, compress bool
 
 // Dump 调试专用，不会中断程序，会在终端打印出 warning 消息。
 // 第一个参数会使用 json.Marshal 进行渲染，第二个参数消息（可选）
-//         logger.Dump(user.User{Name:"test"})
-//         logger.Dump(user.User{Name:"test"}, "用户信息")
+//
+//	logger.Dump(user.User{Name:"test"})
+//	logger.Dump(user.User{Name:"test"}, "用户信息")
 func Dump(value interface{}, msg ...string) {
 	valueString := jsonString(value)
 	// 判断第二个参数是否传参 msg
@@ -146,7 +147,8 @@ func LogInfoIf(err error) {
 
 // Debug 调试日志，详尽的程序日志
 // 调用示例：
-//        logger.Debug("Database", zap.String("sql", sql))
+//
+//	logger.Debug("Database", zap.String("sql", sql))
 func Debug(moduleName string, fields ...zap.Field) {
 	Logger.Debug(moduleName, fields...)
 }
@@ -172,7 +174,8 @@ func Fatal(moduleName string, fields ...zap.Field) {
 }
 
 // DebugString 记录一条字符串类型的 debug 日志，调用示例：
-//         logger.DebugString("SMS", "短信内容", string(result.RawResponse))
+//
+//	logger.DebugString("SMS", "短信内容", string(result.RawResponse))
 func DebugString(moduleName, name, msg string) {
 	Logger.Debug(moduleName, zap.String(name, msg))
 }
@@ -194,7 +197,8 @@ func FatalString(moduleName, name, msg string) {
 }
 
 // DebugJSON 记录一条字符串类型的 debug 日志，调用示例：
-//         logger.DebugString("SMS", "短信内容", string(result.RawResponse))
+//
+//	logger.DebugString("SMS", "短信内容", string(result.RawResponse))
 func DebugJSON(moduleName, name string, value interface{}) {
 	Logger.Debug(moduleName, zap.String(name, jsonString(value)))
 }

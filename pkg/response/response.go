@@ -2,9 +2,9 @@ package response
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/logger"
 	"gorm.io/gorm"
 	"net/http"
+	"server/pkg/logger"
 )
 
 /**

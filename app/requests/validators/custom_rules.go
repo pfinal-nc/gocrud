@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/thedevsaddam/govalidator"
-	"gohub/pkg/database"
+	"server/pkg/database"
 	"strconv"
 	"strings"
 	"unicode/utf8"

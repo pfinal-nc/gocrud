@@ -2,8 +2,8 @@ package bootstrap
 
 import (
 	"fmt"
-	"gohub/pkg/cache"
-	"gohub/pkg/config"
+	"server/pkg/cache"
+	"server/pkg/config"
 )
 
 /**

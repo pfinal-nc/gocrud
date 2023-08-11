@@ -1,9 +1,9 @@
 package seed
 
 import (
-	"gohub/pkg/console"
-	"gohub/pkg/database"
 	"gorm.io/gorm"
+	"server/pkg/console"
+	"server/pkg/database"
 )
 
 /**

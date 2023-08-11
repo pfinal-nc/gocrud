@@ -1,11 +1,11 @@
-//Package topic 模型
+// Package topic 模型
 package topic
 
 import (
-	"gohub/app/models"
-	"gohub/app/models/category"
-	"gohub/app/models/user"
-	"gohub/pkg/database"
+	"server/app/models"
+	"server/app/models/category"
+	"server/app/models/user"
+	"server/pkg/database"
 )
 
 type Topic struct {

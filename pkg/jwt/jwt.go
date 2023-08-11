@@ -10,9 +10,9 @@ package jwt
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/app"
-	"gohub/pkg/config"
-	"gohub/pkg/logger"
+	"server/pkg/app"
+	"server/pkg/config"
+	"server/pkg/logger"
 	"strings"
 	"time"
 

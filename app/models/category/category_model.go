@@ -1,9 +1,9 @@
-//Package category 模型
+// Package category 模型
 package category
 
 import (
-	"gohub/app/models"
-	"gohub/pkg/database"
+	"server/app/models"
+	"server/pkg/database"
 )
 
 type Category struct {

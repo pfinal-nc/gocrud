@@ -7,7 +7,7 @@ package seeders
  * @Desc:
  */
 
-import "gohub/pkg/seed"
+import "server/pkg/seed"
 
 func Initialize() {
 

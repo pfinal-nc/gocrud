@@ -2,9 +2,9 @@ package category
 
 import (
 	"github.com/gin-gonic/gin"
-	"gohub/pkg/app"
-	"gohub/pkg/database"
-	"gohub/pkg/paginator"
+	"server/pkg/app"
+	"server/pkg/database"
+	"server/pkg/paginator"
 )
 
 func Get(idstr string) (category Category) {
