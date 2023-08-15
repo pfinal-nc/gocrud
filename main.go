@@ -6,6 +6,7 @@ import (
 	"os"
 	"server/app/cmd"
 	"server/app/cmd/make"
+	"server/app/cmd/tools"
 	"server/bootstrap"
 	btsConfig "server/config"
 	"server/pkg/config"
@@ -56,6 +57,7 @@ func main() {
 		cmd.CmdDBSeed,
 		cmd.CmdMigrate,
 		cmd.CmdCache,
+		tools.CmdTools,
 	)
 
 	// 配置默认运行 Web 服务
