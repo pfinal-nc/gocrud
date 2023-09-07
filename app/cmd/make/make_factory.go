@@ -11,6 +11,7 @@ import (
  * @Date: 2022/3/4 14:07
  * @Desc:
  */
+
 var CmdMakeFactory = &cobra.Command{
 	Use:   "factory",
 	Short: "Create model's factory file, exmaple: make factory user",

@@ -31,9 +31,13 @@ func InitWithCacheStore(store Store) {
 	})
 }
 
-func Set(key string, obj interface{}, expireTime time.Duration) {
+func Set(key string, obj interface{}, expireTimes ...time.Duration) {
+	var expireTime = time.Duration(3600) * time.Second
 	b, err := json.Marshal(&obj)
 	logger.LogIf(err)
+	if len(expireTimes) < 0 {
+		expireTime = expireTimes[0]
+	}
 	Cache.Store.Set(key, string(b), expireTime)
 }
 

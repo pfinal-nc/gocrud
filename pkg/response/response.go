@@ -21,10 +21,11 @@ func JSON(c *gin.Context, data interface{}) {
 
 // Success 响应 200 和预设『操作成功！』的 JSON 数据
 // 执行某个『没有具体返回数据』的『变更』操作成功后调用，例如删除、修改密码、修改手机号
-func Success(c *gin.Context) {
+func Success(c *gin.Context, data interface{}) {
 	JSON(c, gin.H{
-		"success": true,
+		"code":    0,
 		"message": "操作成功！",
+		"data":    data,
 	})
 }
 
@@ -32,7 +33,8 @@ func Success(c *gin.Context) {
 // 执行『更新操作』成功后调用，例如更新话题，成功后返回已更新的话题
 func Data(c *gin.Context, data interface{}) {
 	JSON(c, gin.H{
-		"success": true,
+		"code":    0,
+		"message": "操作成功！",
 		"data":    data,
 	})
 }
@@ -41,7 +43,8 @@ func Data(c *gin.Context, data interface{}) {
 // 执行『更新操作』成功后调用，例如更新话题，成功后返回已更新的话题
 func Created(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusCreated, gin.H{
-		"success": true,
+		"code":    200,
+		"message": "操作成功！",
 		"data":    data,
 	})
 }
@@ -54,6 +57,7 @@ func CreatedJSON(c *gin.Context, data interface{}) {
 // Abort404 响应 404，未传参 msg 时使用默认消息
 func Abort404(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+		"code":    500,
 		"message": defaultMessage("数据不存在，请确定请求正确", msg...),
 	})
 }
@@ -61,6 +65,7 @@ func Abort404(c *gin.Context, msg ...string) {
 // Abort403 响应 403，未传参 msg 时使用默认消息
 func Abort403(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
+		"code":    500,
 		"message": defaultMessage("权限不足，请确定您有对应的权限", msg...),
 	})
 }
@@ -68,7 +73,9 @@ func Abort403(c *gin.Context, msg ...string) {
 // Abort500 响应 500，未传参 msg 时使用默认消息
 func Abort500(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+		"code":    500,
 		"message": defaultMessage("服务器内部错误，请稍后再试", msg...),
+		"data":    "",
 	})
 }
 
@@ -77,6 +84,7 @@ func Abort500(c *gin.Context, msg ...string) {
 func BadRequest(c *gin.Context, err error, msg ...string) {
 	logger.LogIf(err)
 	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+		"code":    500,
 		"message": defaultMessage("请求解析错误，请确认请求格式是否正确。上传文件请使用 multipart 标头，参数请使用 JSON 格式。", msg...),
 		"error":   err.Error(),
 	})
@@ -94,13 +102,15 @@ func Error(c *gin.Context, err error, msg ...string) {
 	}
 
 	c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+		"code":    500,
 		"message": defaultMessage("请求处理失败，请查看 error 的值", msg...),
 		"error":   err.Error(),
 	})
 }
 
-func ValidationError(c *gin.Context, errors map[string][]string) {
+func ValidationError(c *gin.Context, errors interface{}) {
 	c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+		"code":    500,
 		"message": "请求验证不通过，具体请查看 errors",
 		"errors":  errors,
 	})
@@ -110,7 +120,9 @@ func ValidationError(c *gin.Context, errors map[string][]string) {
 // 登录失败、jwt 解析失败时调用
 func Unauthorized(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		"code":    500,
 		"message": defaultMessage("请求解析错误，请确认请求格式是否正确。上传文件请使用 multipart 标头，参数请使用 JSON 格式。", msg...),
+		"data":    "",
 	})
 }
 

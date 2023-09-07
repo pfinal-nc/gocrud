@@ -56,6 +56,10 @@ type Model struct {
 	PackageName        string
 }
 
+type BaseModel struct {
+	FuncName string
+}
+
 // stubsFS 方便我们后面打包这些 .stub 为后缀名的文件
 
 //go:embed stubs
@@ -74,6 +78,7 @@ func init() {
 		CmdMakeModel,
 		CmdMakeAPIController,
 		CmdMakeRequest,
+		CmdMakeMiddleware,
 		CmdMakeMigration,
 		CmdMakeFactory,
 		CmdMakeSeeder,
@@ -124,6 +129,43 @@ func createFileFromStub(filePath string, stubName string, model Model, variables
 	replaces["{{TableName}}"] = model.TableName
 
 	// 对模板内容做变量替换
+	for search, replace := range replaces {
+		modelStub = strings.ReplaceAll(modelStub, search, replace)
+	}
+
+	// 存储到目标文件中
+	err = file.Put([]byte(modelStub), filePath)
+	if err != nil {
+		console.Exit(err.Error())
+	}
+
+	// 提示成功
+	console.Success(fmt.Sprintf("[%s] created.", filePath))
+}
+
+func makeModelFromBaseString(name string) BaseModel {
+	model := BaseModel{}
+	model.FuncName = str.Singular(strcase.ToCamel(name))
+	return model
+}
+func createFileFromStubBase(filePath string, stubName string, model BaseModel, variables ...interface{}) {
+	// 实现最后一个参数可选
+	replaces := make(map[string]string)
+	if len(variables) > 0 {
+		replaces = variables[0].(map[string]string)
+	}
+	// 目标文件已存在
+	if file.Exists(filePath) {
+		console.Exit(filePath + " already exists!")
+	}
+	// 读取 stub 模板文件
+	modelData, err := stubsFS.ReadFile("stubs/" + stubName + ".stub")
+	if err != nil {
+		console.Exit(err.Error())
+	}
+	modelStub := string(modelData)
+	// 对模板内容做变量替换
+	replaces["{{FuncName}}"] = model.FuncName
 	for search, replace := range replaces {
 		modelStub = strings.ReplaceAll(modelStub, search, replace)
 	}

@@ -1,8 +1,12 @@
 package hash
 
 import (
+	"crypto/md5"
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
+	"io"
 	"server/pkg/logger"
+	"strings"
 )
 
 /**
@@ -31,4 +35,21 @@ func BcryptCheck(password, hash string) bool {
 func BcryptIsHashed(str string) bool {
 	// bcrypt 加密后的长度等于 60
 	return len(str) == 60
+}
+
+func BcryptMd5Hash(password string, salt string) string {
+	w := md5.New()
+	io.WriteString(w, password+salt)
+	md5str2 := fmt.Sprintf("%x", w.Sum(nil))
+	return md5str2
+}
+
+func BcryptIsMd5Hash(str string) bool {
+	// bcrypt 加密后的长度等于 60
+	return len(str) == 32
+}
+
+func BcryptCheckMd5(password string, hash string, salt string) bool {
+	tmpPass := BcryptMd5Hash(password, salt)
+	return strings.EqualFold(tmpPass, hash)
 }

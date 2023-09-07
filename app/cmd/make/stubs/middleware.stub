@@ -1,0 +1,25 @@
+package middlewares
+
+import (
+	"errors"
+	"github.com/gin-gonic/gin"
+	"server/pkg/response"
+)
+
+/**
+ * @Author: PFinal南丞
+ * @Author: lampxiezi@163.com
+ * @Date: 2022/3/7 13:29
+ * @Desc:
+ */
+
+// {{FuncName}} 中间件
+func {{FuncName}}() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		// 获取 User-Agent 标头信息
+
+
+		c.Next()
+	}
+}
