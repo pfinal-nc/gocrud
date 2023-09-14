@@ -21,12 +21,12 @@ import (
 
 // Paging 分页数据
 type Paging struct {
-	CurrentPage int    // 当前页
-	PerPage     int    // 每页条数
-	TotalPage   int    // 总页数
-	TotalCount  int64  // 总条数
-	NextPageURL string // 下一页的链接
-	PrevPageURL string // 上一页的链接
+	CurrentPage int    `json:"current_page"`  // 当前页
+	PerPage     int    `json:"per_page"`      // 每页条数
+	TotalPage   int    `json:"total_page"`    // 总页数
+	TotalCount  int64  `json:"total_count"`   // 总条数
+	NextPageURL string `json:"next_page_url"` // 下一页的链接
+	PrevPageURL string `json:"prev_page_url"` // 上一页的链接
 }
 
 // Paginator 分页操作类
@@ -61,15 +61,19 @@ type Paginator struct {
 //	       app.APIURL(database.TableName(&Topic{})),
 //	       perPage,
 //	   )
-func Paginate(c *gin.Context, db *gorm.DB, data interface{}, baseURL string, perPage int) Paging {
-
+func Paginate(c *gin.Context, db *gorm.DB, data interface{}, baseURL string, perPage int, defaultSortFiled ...string) Paging {
+	fmt.Println(defaultSortFiled)
 	// 初始化 Paginator 实例
 	p := &Paginator{
 		query: db,
 		ctx:   c,
 	}
-	p.initProperties(perPage, baseURL)
-
+	if len(defaultSortFiled) > 0 {
+		p.initProperties(perPage, baseURL, defaultSortFiled[0])
+	} else {
+		p.initProperties(perPage, baseURL)
+	}
+	fmt.Println(p.Sort)
 	// 查询数据库
 	err := p.query.Preload(clause.Associations). // 读取关联
 							Order(p.Sort + " " + p.Order). // 排序
@@ -95,14 +99,18 @@ func Paginate(c *gin.Context, db *gorm.DB, data interface{}, baseURL string, per
 }
 
 // 初始化分页必须用到的属性，基于这些属性查询数据库
-func (p *Paginator) initProperties(perPage int, baseURL string) {
+func (p *Paginator) initProperties(perPage int, baseURL string, defaultSortFiled ...string) {
 
 	p.BaseURL = p.formatBaseURL(baseURL)
 	p.PerPage = p.getPerPage(perPage)
 
 	// 排序参数（控制器中以验证过这些参数，可放心使用）
 	p.Order = p.ctx.DefaultQuery(config.Get("paging.url_query_order"), "asc")
-	p.Sort = p.ctx.DefaultQuery(config.Get("paging.url_query_sort"), "id")
+	if defaultSortFiled != nil {
+		p.Sort = p.ctx.DefaultQuery(config.Get("paging.url_query_sort"), defaultSortFiled[0])
+	} else {
+		p.Sort = p.ctx.DefaultQuery(config.Get("paging.url_query_sort"), "id")
+	}
 
 	p.TotalCount = p.getTotalCount()
 	p.TotalPage = p.getTotalPage()

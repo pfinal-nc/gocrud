@@ -59,6 +59,7 @@ func Abort404(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
 		"code":    500,
 		"message": defaultMessage("数据不存在，请确定请求正确", msg...),
+		"data":    "",
 	})
 }
 

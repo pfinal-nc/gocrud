@@ -16,16 +16,16 @@ import (
 	"github.com/spf13/cast"
 )
 
-type CacheService struct {
+type Service struct {
 	Store Store
 }
 
 var once sync.Once
-var Cache *CacheService
+var Cache *Service
 
 func InitWithCacheStore(store Store) {
 	once.Do(func() {
-		Cache = &CacheService{
+		Cache = &Service{
 			Store: store,
 		}
 	})
@@ -39,6 +39,14 @@ func Set(key string, obj interface{}, expireTimes ...time.Duration) {
 		expireTime = expireTimes[0]
 	}
 	Cache.Store.Set(key, string(b), expireTime)
+}
+
+func SetString(key string, str string, expireTimes ...time.Duration) {
+	var expireTime = time.Duration(3600) * time.Second * 24
+	if len(expireTimes) < 0 {
+		expireTime = expireTimes[0]
+	}
+	Cache.Store.Set(key, str, expireTime)
 }
 
 func Get(key string) interface{} {

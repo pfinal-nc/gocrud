@@ -142,3 +142,19 @@ func GetBool(path string, defaultValue ...interface{}) bool {
 func GetStringMapString(path string) map[string]string {
 	return viper.GetStringMapString(path)
 }
+
+// GetStringMapInterface 获取结构数据
+func GetStringMapInterface(path string) map[string]interface{} {
+	return viper.GetStringMap(path)
+}
+
+// GetStringList 获取结构数据
+func GetStringList(path string) []interface{} {
+	var configList []interface{}
+	configMap := viper.GetStringMap(path)
+	for _, config := range configMap {
+		configList = append(configList, config)
+	}
+	return configList
+
+}

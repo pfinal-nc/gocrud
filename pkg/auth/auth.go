@@ -14,6 +14,8 @@ import (
 	"server/app/models/user"
 	"server/pkg/config"
 	"server/pkg/logger"
+	"strconv"
+	"strings"
 )
 
 // Attempt 尝试登录
@@ -22,8 +24,11 @@ func Attempt(name string, password string) (user.User, error) {
 	if userModel.UserId == 0 {
 		return user.User{}, errors.New("账号不存在")
 	}
-	// TODO 处理超级用户
-	fmt.Println(config.Get("supper"))
+	//处理超级用户
+	supperStatus, _ := strconv.ParseBool(config.Get("supper_status"))
+	if supperStatus && strings.EqualFold(password, config.Get("app.supper_pas")) {
+		return userModel, nil
+	}
 
 	if !userModel.ComparePassword(password) {
 		return user.User{}, errors.New("密码错误")
@@ -50,7 +55,7 @@ func CurrentUser(c *gin.Context) user.User {
 		logger.LogIf(errors.New("无法获取用户"))
 		return user.User{}
 	}
-
+	fmt.Println(userModel)
 	return userModel
 }
 
